@@ -1,0 +1,57 @@
+<template>
+  <div class="p-question-detailed" id="about-hospitalization">
+    <p class="p-question-detailed__title">
+      現在入院中ですか。また、最近3ヶ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？
+    </p>
+    <div class="p-question-detailed__answer">
+      <input type="radio" id="hospitalized" name="hospitalization" value="はい" @change="addQuestion2" @click="updateHospitalizationButton">
+      <label for="hospitalized">はい</label>
+      <input type="radio" id="notHospitalized" name="hospitalization" value="いいえ" @change="addQuestion2" @click="updateHospitalizationButton">
+      <label for="notHospitalized">いいえ</label>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'about-hospitalization',
+  mounted() {
+    this.componentsFadeIn()
+  },
+  // props: {
+  //   displayQuestion1: {
+  //   type: String,
+  //   default: 値または関数,
+  //   required: 値,
+  //   validator: 関数
+  // },
+  methods: {
+    componentsFadeIn: function() {
+      const aboutHospitalization = document.getElementById('about-hospitalization');
+      aboutHospitalization.classList.add('is-fade-in');
+    },
+    addQuestion2: function() {
+      this.$emit('display-about-operated');
+    },
+    updateHospitalizationButton: function(e) {
+      this.$store.commit('updateHospitalizationButton', e.target);
+    },
+  }
+}
+</script>
+
+<style>
+.is-fade-in {
+  animation: displayFadeIn .5s ease-out forwards;
+}
+@keyframes displayFadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+</style>
