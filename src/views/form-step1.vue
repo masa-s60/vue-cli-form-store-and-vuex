@@ -2,7 +2,7 @@
   <div class="formStep1">
     <form id="app" class="p-form" action="">
       <div  class="p-question">
-        <p class="p-step">STEP{{$store.state.stepNumber}}</p>
+        <p class="p-step">STEP{{ $store.getters.getStepNumber }}</p>
         <h2 class="p-question-title">お客様の情報を入力してください</h2>
       </div>
       <div class="p-question-detailed">
@@ -46,7 +46,7 @@ export default {
     this.checkBirthdayData()
   },
   beforeRouteLeave(step2, step1, next) {
-    if (this.$store.state.formData.sexButton.value === undefined) {
+    if(this.$store.getters.getSexButtonValue === undefined) {
       return window.alert('性別が選択されていません');
     } else {
       next();
@@ -54,10 +54,8 @@ export default {
   },
   methods: {
     checkSexData: function() {
-      console.log(this.$store.state.formData.sexButton.value);
-      if(this.$store.state.formData.sexButton.value !== undefined) {
-        console.log(this.$store.state.formData.sexButton.id);
-        let radioButton = document.getElementById(this.$store.state.formData.sexButton.id);
+      if(this.$store.getters.getSexButtonValue !== undefined) {
+        let radioButton = document.getElementById(this.$store.getters.getSexButtonId);
         radioButton.checked = true;
       } 
     },
@@ -109,21 +107,21 @@ export default {
     },
     selectedOptionYear: function(index, element, newElement) {
       if(element.name === 'year') {
-        if(this.$store.state.formData.year === String(index)) {
+        if(this.$store.getters.getYear === String(index)) {
         newElement.selected = true;
         }
       }
     },
     selectedOptionMonth: function(index, element, newElement) {
       if(element.name === 'month') {
-        if(this.$store.state.formData.month === String(index)) {
+        if(this.$store.getters.getMonth === String(index)) {
         newElement.selected = true;
         }
       }
     },
     selectedOptionDay: function(index, element, newElement) {
       if(element.name === 'day') {
-        if(this.$store.state.formData.day === String(index)) {
+        if(this.$store.getters.getDay === String(index)) {
         newElement.selected = true;
         }
       }

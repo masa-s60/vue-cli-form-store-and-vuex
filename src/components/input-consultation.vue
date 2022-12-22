@@ -2,7 +2,7 @@
   <div>
     <form id="app" class="p-form" action="">
       <div class="p-question">
-        <p class="p-step">STEP{{$store.state.stepNumber}}</p>
+        <p class="p-step">STEP{{ $store.getters.getStepNumber }}</p>
         <h2 class="p-question-title">ご相談内容をご記入ください</h2>
       </div>
       <div class="p-question-detailed">
@@ -21,10 +21,9 @@ export default {
   },
   methods: {
     checkConsultationData: function() {
-      if(this.$store.state.formData.consultation.value !== undefined) {
-        console.log(this.$store.state.formData.consultation.id);
-        let text = document.getElementById(this.$store.state.formData.consultation.id);
-        text.value = this.$store.state.formData.consultation.value;
+      if(this.$store.getters.getConsultationValue !== undefined) {
+        let text = document.getElementById(this.$store.getters.getConsultationId);
+        text.value = this.$store.getters.getConsultationValue;
       }
     },
     addFadeIn: function() {

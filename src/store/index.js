@@ -19,6 +19,52 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    getStepNumber(state) {
+      return state.stepNumber
+    },
+    getFormSet(state) {
+      return state.formSet
+    },
+    getSexButtonValue(state) {
+      console.log(state.formData.sexButton.value);
+      return state.formData.sexButton.value;
+    },
+    getSexButtonId(state) {
+      return state.formData.sexButton.id;
+    },
+    getYear(state) {
+      return state.formData.year;
+    },
+    getMonth(state) {
+      return state.formData.month;
+    },
+    getDay(state) {
+      return state.formData.day;
+    },
+    getLifeInsuranceButtonValue(state) {
+      return state.formData.lifeInsuranceButton.value;
+    },
+    getLifeInsuranceButtonId(state) {
+      return state.formData.lifeInsuranceButton.id;
+    },
+    getHospitalizationButtonValue(state) {
+      return state.formData.hospitalizationButton.value;
+    },
+    getHospitalizationButtonId(state) {
+      return state.formData.hospitalizationButton.id;
+    },
+    getOperatedButtonValue(state) {
+      return state.formData.operatedButton.value;
+    },
+    getOperatedButtonId(state) {
+      return state.formData.operatedButton.id;
+    },
+    getConsultationValue(state) {
+      return state.formData.consultation.value;
+    },
+    getConsultationId(state) {
+      return state.formData.consultation.id;
+    },
   },
   mutations: {
     updateStepNumber: function(state, stepNumber) {

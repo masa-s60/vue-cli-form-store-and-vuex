@@ -1,17 +1,17 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{'is-fade-in': active}">
     <nav>
     </nav>
     <router-view/>
-    <div class="p-move" @click="fadeIn">
-      <router-link class="p-next" :to="{name: 'step2'}" v-if="($store.state.stepNumber === 1)" >次へ進む</router-link>
-      <router-link class="p-next" :to="{name: 'step1'}" v-if="($store.state.stepNumber === 2)" >前に戻る</router-link>
-      <router-link class="p-next" :to="{name: 'step3'}" v-if="($store.state.stepNumber === 2)" >次へ進む</router-link>
-      <router-link class="p-next" :to="{name: 'step2'}" v-if="(($store.state.stepNumber === 3) && ($store.state.formSet !== 'OK'))">前に戻る</router-link>
-      <router-link class="p-next" :to="{name: 'confirm'}" v-if="(($store.state.stepNumber === 3) && ($store.state.formSet !== 'OK'))" >次へ進む</router-link>
-      <router-link class="p-next" :to="{name: 'step3'}" v-if="(($store.state.stepNumber === 3) && ($store.state.formSet === 'OK'))">前に戻る</router-link>
-      <router-link class="p-next" :to="{name: 'step4'}" v-if="(($store.state.stepNumber === 3) && ($store.state.formSet === 'OK'))" >送信</router-link>
-      <router-link class="p-next" :to="{name: 'step3'}" v-if="($store.state.stepNumber === 4)" >前に戻る</router-link>
+    <div class="p-move" @click="reActiveFadeIn">
+      <router-link class="p-next" :to="{name: 'step2'}" v-if="($store.getters.getStepNumber === 1)" >次へ進む</router-link>
+      <router-link class="p-next" :to="{name: 'step1'}" v-if="($store.getters.getStepNumber === 2)" >前に戻る</router-link>
+      <router-link class="p-next" :to="{name: 'step3'}" v-if="($store.getters.getStepNumber === 2)" >次へ進む</router-link>
+      <router-link class="p-next" :to="{name: 'step2'}" v-if="(($store.getters.getStepNumber === 3) && ($store.getters.getFormSet !== 'OK'))">前に戻る</router-link>
+      <router-link class="p-next" :to="{name: 'confirm'}" v-if="(($store.getters.getStepNumber === 3) && ($store.getters.getFormSet !== 'OK'))" >次へ進む</router-link>
+      <router-link class="p-next" :to="{name: 'step3'}" v-if="(($store.getters.getStepNumber === 3) && ($store.getters.getFormSet === 'OK'))">前に戻る</router-link>
+      <router-link class="p-next" :to="{name: 'step4'}" v-if="(($store.getters.getStepNumber === 3) && ($store.getters.getFormSet === 'OK'))" >送信</router-link>
+      <router-link class="p-next" :to="{name: 'step3'}" v-if="($store.getters.getStepNumber === 4)" >前に戻る</router-link>
     </div>
     <!-- router-linkタグ内にクリックイベントを記述する場合はnative記述必須 @click.native="fadeIn" -->
   </div>
@@ -22,21 +22,28 @@ export default {
   name: 'app',
   data: function() {
     return {
+      active: true,
     }
   },
   mounted() {
-    this.fadeIn();
+    this.reActiveFadeIn();
   },
   computed: {
   },
   methods: {
-    fadeIn: function() {
-      const display = document.getElementById('app');
-      display.classList.add('is-fade-in');
+    reActiveFadeIn: function() {
+      this.active = true;
       setTimeout( () => {
-        display.classList.remove('is-fade-in');
+        this.active = false;
       }, 500);
     },
+    // fadeIn: function() {
+    //   const display = document.getElementById('app');
+    //   display.classList.add('is-fade-in');
+    //   setTimeout( () => {
+    //     display.classList.remove('is-fade-in');
+    //   }, 500);
+    // },
   }
 }
 </script>

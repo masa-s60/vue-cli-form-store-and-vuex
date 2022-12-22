@@ -16,7 +16,6 @@
 export default {
   name: 'about-hospitalization',
   mounted() {
-    this.componentsFadeIn()
   },
   // props: {
   //   displayQuestion1: {
@@ -26,10 +25,6 @@ export default {
   //   validator: 関数
   // },
   methods: {
-    componentsFadeIn: function() {
-      const aboutHospitalization = document.getElementById('about-hospitalization');
-      aboutHospitalization.classList.add('is-fade-in');
-    },
     addQuestion2: function() {
       this.$emit('display-about-operated');
     },
@@ -39,19 +34,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.is-fade-in {
-  animation: displayFadeIn .5s ease-out forwards;
-}
-@keyframes displayFadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-</style>

@@ -16,32 +16,11 @@
 export default {
   name: 'about-operated',
   mounted() {
-    this.componentsFadeIn()
   },
   methods: {
-    componentsFadeIn: function() {
-      const aboutOperated = document.getElementById('about-operated');
-      aboutOperated.classList.add('is-fade-in');
-    },
     updateOperated: function(e) {
       this.$store.commit('updateOperatedButton', e.target);
     },
   }
 }
 </script>
-
-<style>
-.is-fade-in {
-  animation: displayFadeIn .5s ease-out forwards;
-}
-@keyframes displayFadeIn {
-  0% {
-    opacity: 0;
-    visibility: hidden;
-  }
-  100% {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-</style>

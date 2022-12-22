@@ -2,7 +2,7 @@
   <div>
     <form id="app" class="p-form" action="">
       <div class="p-question">
-        <p class="p-step">STEP{{$store.state.stepNumber}}</p>
+        <p class="p-step">STEP{{ $store.getters.getStepNumber }}</p>
         <h2 class="p-question-title">以下にお答えください</h2>
       </div>
       <div class="p-question-detailed">
@@ -14,8 +14,8 @@
           <label for="notInsured">いいえ</label>
         </div>
       </div>
-      <aboutHospitalization v-show="displayHospitalizationSelect" @display-about-operated="changeAuthenticityQuestion2"></aboutHospitalization>
-      <about-operated v-show="displayOperatedSelect"></about-operated>
+      <aboutHospitalization v-show="displayHospitalizationSelect" :class="{'is-fade-in': displayHospitalizationSelect}" @display-about-operated="changeAuthenticityQuestion2"></aboutHospitalization>
+      <about-operated v-show="displayOperatedSelect" :class="{'is-fade-in': displayHospitalizationSelect}"></about-operated>
     </form>
   </div>
 </template>
@@ -29,16 +29,16 @@ export default {
   data: function() {
     return {
       displayHospitalizationSelect: false,
-      displayOperatedSelect: false
+      displayOperatedSelect: false,
     }
   },
   beforeRouteLeave(nextStep, step2, next) {
     if(nextStep.name === 'step1') {
       return next();
     }
-    if ((this.$store.state.formData.lifeInsuranceButton.value === undefined) || 
-    (this.$store.state.formData.lifeInsuranceButton.value === undefined) || 
-    (this.$store.state.formData.operatedButton.value === undefined)) {
+    if ((this.$store.getters.getLifeInsuranceButtonValue === undefined) || 
+    (this.$store.getters.getHospitalizationButtonValue === undefined) || 
+    (this.$store.getters.getOperatedButtonValue === undefined)) {
       return window.alert('全ての項目が選択されていません');
     } else {
       next();
@@ -54,25 +54,22 @@ export default {
   },
   methods: {
     checkLifeInsuranceData: function() {
-      if(this.$store.state.formData.lifeInsuranceButton.value !== undefined) {
-        console.log(this.$store.state.formData.lifeInsuranceButton.id);
-        let radioButton = document.getElementById(this.$store.state.formData.lifeInsuranceButton.id);
+      if(this.$store.getters.getLifeInsuranceButtonValue !== undefined) {
+        let radioButton = document.getElementById(this.$store.getters.getLifeInsuranceButtonId);
         radioButton.checked = true;
         this.displayHospitalizationSelect = true;
       }
     },
     checkHospitalizationData: function() {
-      if(this.$store.state.formData.hospitalizationButton.value !== undefined) {
-        console.log(this.$store.state.formData.hospitalizationButton.id);
-        let radioButton = document.getElementById(this.$store.state.formData.hospitalizationButton.id);
+      if(this.$store.getters.getHospitalizationButtonValue !== undefined) {
+        let radioButton = document.getElementById(this.$store.getters.getHospitalizationButtonId);
         radioButton.checked = true;
         this.displayOperatedSelect = true;
       }
     },
     checkOperatedData: function() {
-      if(this.$store.state.formData.operatedButton.value !== undefined) {
-        console.log(this.$store.state.formData.operatedButton.id);
-        let radioButton = document.getElementById(this.$store.state.formData.operatedButton.id);
+      if(this.$store.getters.getOperatedButtonValue !== undefined) {
+        let radioButton = document.getElementById(this.$store.getters.getOperatedButtonId);
         radioButton.checked = true;
       }
     },
