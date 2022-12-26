@@ -8,9 +8,9 @@
       <div class="p-question-detailed">
         <p class="p-question-detailed__title">現在、生命保険に加入されていますか？</p>
         <div class="p-question-detailed__answer">
-          <input type="radio" id="insured" name="insurance" value="はい" @change="addQuestion1" @click="updateLifeInsuranceButton">
+          <input type="radio" id="insured" name="insurance" v-model="$store.getters.getLifeInsurance" value="はい" @change="addQuestion1" @click="updateLifeInsurance">
           <label for="insured">はい</label>
-          <input type="radio" id="notInsured" name="insurance" value="いいえ" @change="addQuestion1" @click="updateLifeInsuranceButton">
+          <input type="radio" id="notInsured" name="insurance" v-model="$store.getters.getLifeInsurance" value="いいえ" @change="addQuestion1" @click="updateLifeInsurance">
           <label for="notInsured">いいえ</label>
         </div>
       </div>
@@ -36,9 +36,9 @@ export default {
     if(nextStep.name === 'step1') {
       return next();
     }
-    if ((this.$store.getters.getLifeInsuranceButtonValue === undefined) || 
-    (this.$store.getters.getHospitalizationButtonValue === undefined) || 
-    (this.$store.getters.getOperatedButtonValue === undefined)) {
+    if ((this.$store.getters.getLifeInsurance === '') || 
+    (this.$store.getters.getHospitalization === '') || 
+    (this.$store.getters.getOperated === '')) {
       return window.alert('全ての項目が選択されていません');
     } else {
       next();
@@ -48,29 +48,18 @@ export default {
     this.updateStepNumber(2);
   },
   mounted() {
-    this.checkLifeInsuranceData()
+    this.checkLifeInsurance()
     this.checkHospitalizationData()
-    this.checkOperatedData()
   },
   methods: {
-    checkLifeInsuranceData: function() {
-      if(this.$store.getters.getLifeInsuranceButtonValue !== undefined) {
-        let radioButton = document.getElementById(this.$store.getters.getLifeInsuranceButtonId);
-        radioButton.checked = true;
+    checkLifeInsurance: function() {
+      if(this.$store.getters.getLifeInsurance !== '') {
         this.displayHospitalizationSelect = true;
       }
     },
     checkHospitalizationData: function() {
-      if(this.$store.getters.getHospitalizationButtonValue !== undefined) {
-        let radioButton = document.getElementById(this.$store.getters.getHospitalizationButtonId);
-        radioButton.checked = true;
+      if(this.$store.getters.getHospitalization !== '') {
         this.displayOperatedSelect = true;
-      }
-    },
-    checkOperatedData: function() {
-      if(this.$store.getters.getOperatedButtonValue !== undefined) {
-        let radioButton = document.getElementById(this.$store.getters.getOperatedButtonId);
-        radioButton.checked = true;
       }
     },
     addQuestion1: function() {
@@ -82,8 +71,8 @@ export default {
     updateStepNumber: function(stepNumber) {
       this.$store.commit('updateStepNumber', stepNumber);
     },
-    updateLifeInsuranceButton: function(e) {
-      this.$store.commit('updateLifeInsuranceButton', e.target);
+    updateLifeInsurance: function(e) {
+      this.$store.commit('updateLifeInsurance', e.target.value);
     },
   },
   components: {

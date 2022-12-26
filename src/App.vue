@@ -37,13 +37,6 @@ export default {
         this.active = false;
       }, 500);
     },
-    // fadeIn: function() {
-    //   const display = document.getElementById('app');
-    //   display.classList.add('is-fade-in');
-    //   setTimeout( () => {
-    //     display.classList.remove('is-fade-in');
-    //   }, 500);
-    // },
   }
 }
 </script>

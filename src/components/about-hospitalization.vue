@@ -4,9 +4,9 @@
       現在入院中ですか。また、最近3ヶ月以内に医師の診察・検査の結果、入院・手術をすすめられたことはありますか？
     </p>
     <div class="p-question-detailed__answer">
-      <input type="radio" id="hospitalized" name="hospitalization" value="はい" @change="addQuestion2" @click="updateHospitalizationButton">
+      <input type="radio" id="hospitalized" name="hospitalization" v-model="$store.getters.getHospitalization" value="はい" @change="addQuestion2" @click="updateHospitalization">
       <label for="hospitalized">はい</label>
-      <input type="radio" id="notHospitalized" name="hospitalization" value="いいえ" @change="addQuestion2" @click="updateHospitalizationButton">
+      <input type="radio" id="notHospitalized" name="hospitalization" v-model="$store.getters.getHospitalization" value="いいえ" @change="addQuestion2" @click="updateHospitalization">
       <label for="notHospitalized">いいえ</label>
     </div>
   </div>
@@ -28,8 +28,8 @@ export default {
     addQuestion2: function() {
       this.$emit('display-about-operated');
     },
-    updateHospitalizationButton: function(e) {
-      this.$store.commit('updateHospitalizationButton', e.target);
+    updateHospitalization: function(e) {
+      this.$store.commit('updateHospitalization', e.target.value);
     },
   }
 }
