@@ -8,9 +8,9 @@
       <div class="p-question-detailed">
         <p class="p-question-detailed__title">現在、生命保険に加入されていますか？</p>
         <div class="p-question-detailed__answer">
-          <input type="radio" id="insured" name="insurance" v-model="$store.getters.getLifeInsurance" value="はい" @change="addQuestion1" @click="updateLifeInsurance">
+          <input type="radio" id="insured" name="insurance" v-model="lifeInsurance" value="はい" @change="addQuestion1">
           <label for="insured">はい</label>
-          <input type="radio" id="notInsured" name="insurance" v-model="$store.getters.getLifeInsurance" value="いいえ" @change="addQuestion1" @click="updateLifeInsurance">
+          <input type="radio" id="notInsured" name="insurance" v-model="lifeInsurance" value="いいえ" @change="addQuestion1">
           <label for="notInsured">いいえ</label>
         </div>
       </div>
@@ -45,7 +45,17 @@ export default {
     }
   },
   beforeMount() {
-    this.updateStepNumber(2);
+    this.setStepNumber(2);
+  },
+  computed: {
+    lifeInsurance: {
+      get() {
+        return this.$store.getters.getLifeInsurance;
+      },
+      set(lifeInsurance) {
+        this.$store.dispatch("commitLifeInsurance", lifeInsurance);
+      }
+    },
   },
   mounted() {
     this.checkLifeInsurance()
@@ -68,11 +78,8 @@ export default {
     changeAuthenticityQuestion2: function() {
       this.displayOperatedSelect = true
     },
-    updateStepNumber: function(stepNumber) {
-      this.$store.commit('updateStepNumber', stepNumber);
-    },
-    updateLifeInsurance: function(e) {
-      this.$store.commit('updateLifeInsurance', e.target.value);
+    setStepNumber: function(stepNumber) {
+      this.$store.dispatch("commitStepNumber", stepNumber);
     },
   },
   components: {

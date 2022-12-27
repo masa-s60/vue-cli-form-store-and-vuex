@@ -22,14 +22,14 @@ export default {
     }
   },
   beforeMount() {
-    this.updateStepNumber(3);
+    this.setStepNumber(3);
     this.updateFormSet();
   },
   mounted() {
   },
   methods: {
-    updateStepNumber: function(stepNumber) {
-      this.$store.commit('updateStepNumber', stepNumber);
+    setStepNumber: function(stepNumber) {
+      this.$store.dispatch("commitStepNumber", stepNumber);
     },
     updateFormSet: function() {
       this.$store.commit('updateFormSet', 'NG');

@@ -23,52 +23,20 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getStepNumber(state) {
-      return state.stepNumber
-    },
-    getYearsList(state) {
-      return state.formData.yearsList;
-    },
-    getEraList(state) {
-      return state.formData.EraList;
-    },
-    getMonthsList(state) {
-      return state.formData.monthsList;
-    },
-    getDaysList(state) {
-      return state.formData.daysList;
-    },
-    getFormSet(state) {
-      return state.formSet
-    },
-    getSex(state) {
-      console.log(state.formData.sex);
-      return state.formData.sex;
-    },
-    getBirthdayYear(state) {
-      console.log(state.formData.birthdayYear);
-      return state.formData.birthdayYear;
-    },
-    getBirthdayMonth(state) {
-      console.log(state.formData.birthdayMonth);
-      return state.formData.birthdayMonth;
-    },
-    getBirthdayDay(state) {
-      console.log(state.formData.birthdayDay);
-      return state.formData.birthdayDay;
-    },
-    getLifeInsurance(state) {
-      return state.formData.lifeInsurance;
-    },
-    getHospitalization(state) {
-      return state.formData.hospitalization;
-    },
-    getOperated(state) {
-      return state.formData.operated;
-    },
-    getConsultation(state) {
-      return state.formData.consultation;
-    },
+    getStepNumber: state => state.stepNumber,
+    getYearsList: state => state.formData.yearsList,
+    getEraList: state => state.formData.EraList,
+    getMonthsList: state => state.formData.monthsList,
+    getDaysList: state => state.formData.daysList,
+    getFormSet: state => state.formSet,
+    getSex: state => state.formData.sex,
+    getBirthdayYear: state => state.formData.birthdayYear,
+    getBirthdayMonth: state => state.formData.birthdayMonth,
+    getBirthdayDay: state => state.formData.birthdayDay,
+    getLifeInsurance: state => state.formData.lifeInsurance,
+    getHospitalization: state => state.formData.hospitalization,
+    getOperated: state => state.formData.operated,
+    getConsultation: state => state.formData.consultation,
   },
   mutations: {
     createYearsList: function(state, year) {
@@ -121,6 +89,33 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    commitStepNumber: function({ commit }, stepNumber) {
+      commit('updateStepNumber', stepNumber);
+    },
+    commitSex: function({ commit }, sex) {
+      commit('updateSex', sex);
+    },
+    commitYear: function({ commit }, year) {
+      commit('updateBirthdayYear', year);
+    },
+    commitMonth: function({ commit }, month) {
+      commit('updateBirthdayMonth', month);
+    },
+    commitDay: function({ commit }, day) {
+      commit('updateBirthdayDay', day);
+    },
+    commitLifeInsurance: function({ commit }, lifeInsurance) {
+      commit('updateLifeInsurance', lifeInsurance);
+    },
+    commitHospitalization: function({ commit }, hospitalization) {
+      commit('updateHospitalization', hospitalization);
+    },
+    commitOperated: function({ commit }, operated) {
+      commit('updateOperated', operated);
+    },
+    commitConsultation: function({ commit }, consultation) {
+      commit('updateConsultation', consultation);
+    },
   },
   modules: {
   }

@@ -7,26 +7,26 @@
       </div>
       <div class="p-question-detailed">
         <p class="p-question-detailed__title">-性別-</p>
-        <input type="radio" id="male" name="sex" v-model="$store.getters.getSex" value="男性" @change="updateSex">
+        <input type="radio" id="male" name="sex" v-model="sex" value="男性">
         <label for="male">男性</label>
-        <input type="radio" id="female" name="sex" v-model="$store.getters.getSex" value="女性" @change="updateSex">
+        <input type="radio" id="female" name="sex" v-model="sex" value="女性">
         <label for="female">女性</label>
       </div>
       <div class="p-question-detailed">
         <p class="p-question-detailed__title">-生年月日-</p>
-        <select id="selectYear" name="year" v-model="$store.getters.getBirthdayYear" @change="updateBirthdayYear">
+        <select id="selectYear" name="year" v-model="year" @change="rebuildDate">
           <option v-for="(year, index) in $store.getters.getYearsList" :key="index">
             {{$store.getters.getYearsList[index]}}({{$store.getters.getEraList[index]}})
           </option>
         </select>
         <span>年</span>
-        <select id="selectMonth" name="month" v-model="$store.getters.getBirthdayMonth" @change="updateBirthdayMonth">
+        <select id="selectMonth" name="month" v-model="month" @change="rebuildDate">
           <option v-for="(month, index) in $store.getters.getMonthsList" :key="index">
             {{$store.getters.getMonthsList[index]}}
           </option>
         </select>
         <span>月</span>
-        <select id="selectDay" name="day" v-model="$store.getters.getBirthdayDay" @change="updateBirthdayDay">
+        <select id="selectDay" name="day" v-model="day">
           <option v-for="(day, index) in $store.getters.getDaysList" :key="index">
             {{$store.getters.getDaysList[index]}}
           </option>
@@ -50,7 +50,7 @@ export default {
   //   }
   // },
   beforeMount() {
-    this.updateStepNumber(1)
+    this.setStepNumber(1)
   },
   mounted() {
     this.createYearsList()
@@ -64,6 +64,38 @@ export default {
     }
   },
   computed: {
+    sex: {
+      get() {
+        return this.$store.getters.getSex;
+      },
+      set(sex) {
+        this.$store.dispatch("commitSex", sex);
+      }
+    },
+    year: {
+      get() {
+        return this.$store.getters.getBirthdayYear;
+      },
+      set(year) {
+        this.$store.dispatch("commitYear", year);
+      }
+    },
+    month: {
+      get() {
+        return this.$store.getters.getBirthdayMonth;
+      },
+      set(month) {
+        this.$store.dispatch("commitMonth", month);
+      }
+    },
+    day: {
+      get() {
+        return this.$store.getters.getBirthdayDay;
+      },
+      set(day) {
+        this.$store.dispatch("commitDay", day);
+      }
+    },
   },
   methods: {
     createYearsList: function() {
@@ -93,22 +125,8 @@ export default {
         this.$store.commit('createDaysList', i);
       }
     },
-    updateStepNumber: function(stepNumber) {
-      this.$store.commit('updateStepNumber', stepNumber);
-    },
-    updateSex: function(e) {
-      this.$store.commit('updateSex', e.target.value);
-    },
-    updateBirthdayYear: function(selectedYear) {
-      this.$store.commit('updateBirthdayYear', selectedYear.target.value);
-      this.rebuildDate();
-    },
-    updateBirthdayMonth: function(selectedMonth) {
-      this.$store.commit('updateBirthdayMonth', selectedMonth.target.value);
-      this.rebuildDate();
-    },
-    updateBirthdayDay: function(selectedDay) {
-      this.$store.commit('updateBirthdayDay', selectedDay.target.value);
+    setStepNumber: function(stepNumber) {
+      this.$store.dispatch("commitStepNumber", stepNumber);
     },
   }
 }

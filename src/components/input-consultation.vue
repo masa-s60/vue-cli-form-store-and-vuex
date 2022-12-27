@@ -7,7 +7,7 @@
       </div>
       <div class="p-question-detailed">
         <p class="p-question-detailed__title">-ご相談内容-</p>
-        <textarea id="consultation" class="p-question-detailed__input-text" rows="" cols="" v-model="$store.getters.getConsultation" @change="updateConsultation"></textarea> 
+        <textarea id="consultation" class="p-question-detailed__input-text" rows="" cols="" v-model="consultation"></textarea> 
       </div>
     </form>
   </div>
@@ -16,13 +16,16 @@
 <script>
 export default {
   name: 'input-consultation',
-  mounted() {
+  computed: {
+    consultation: {
+      get() {
+        return this.$store.getters.getConsultation;
+      },
+      set(consultation) {
+        this.$store.dispatch("commitConsultation", consultation);
+      }
+    },
   },
-  methods: {
-    updateConsultation: function(e) {
-      this.$store.commit('updateConsultation', e.target.value);
-    }
-  }
 }
 </script>
 
