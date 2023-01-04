@@ -82,8 +82,8 @@ export default new Vuex.Store({
       state.formData.consultation = consultation;
       console.log(state.formData.consultation);
     },
-    updateFormSet: function(state, formSet) {
-      state.formSet = formSet;
+    updateFormSet: function(state, ok) {
+      state.formSet = ok;
       console.log(state.formSet);
     },
   },
@@ -114,6 +114,9 @@ export default new Vuex.Store({
     },
     commitConsultation: function({ commit }, consultation) {
       commit('updateConsultation', consultation);
+    },
+    commitFormSet: function({ commit }, ok) {
+      commit('updateFormSet', ok);
     },
   },
   modules: {

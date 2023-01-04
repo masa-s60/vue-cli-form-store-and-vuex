@@ -22,12 +22,12 @@ const routes = [
     component: () => import('../views/form-step3.vue'),
     props: true
   },
-  // {
-  //   path: '',
-  //   name: 'confirm',
-  //   component: () => import('../views/confirm-display.vue'),
-  //   props: true
-  // },
+  {
+    path: '',
+    name: 'confirm',
+    component: () => import('../views/confirm-display.vue'),
+    props: true
+  },
 ]
 
 const router = new VueRouter({
