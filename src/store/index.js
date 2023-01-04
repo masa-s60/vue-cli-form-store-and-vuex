@@ -53,7 +53,6 @@ export default new Vuex.Store({
     },
     updateSex: function(state, sex) {
       state.formData.sex = sex;
-      console.log(state.formData.sex);
     },
     updateBirthdayYear: function(state, year) {
       state.formData.birthdayYear = year;
